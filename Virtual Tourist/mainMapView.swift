@@ -29,6 +29,11 @@ class mainMapView : UIViewController, MKMapViewDelegate, NSFetchedResultsControl
     
     var fetchedResultController: NSFetchedResultsController<Pin>!
     
+    var filePathMapRegion : String {
+        let manager = FileManager.default
+        let url = manager.urls(for: .documentDirectory, in: .userDomainMask).first! as URL
+        return url.appendingPathComponent("mapRegion").path
+    }
     
     
     func getPins(){
@@ -84,5 +89,17 @@ class mainMapView : UIViewController, MKMapViewDelegate, NSFetchedResultsControl
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         
     }
+    
+    func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool){
+        let regionDictionary = [
+            "latitude" : mapView.region.center.latitude,
+            "longitude" : mapView.region.center.longitude,
+            "latitudeDelta" : mapView.region.span.latitudeDelta,
+            "longitudeDelka" : mapView.region.span.longitudeDelta
+        ]
+        NSKeyedArchiver.archiveRootObject(regionDictionary, toFile: filePathMapRegion)
+    }
+    
+    
     
 }
