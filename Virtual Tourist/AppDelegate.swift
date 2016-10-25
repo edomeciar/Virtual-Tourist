@@ -12,11 +12,24 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    let stack = CoreDataStack(modelName: "Model")!
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        //preLoadData()
+        
+        // Start Autosaving
+        stack.autoSave(60)
         return true
+    }
+    
+    func preLoadData(){
+        let pin1 = Pin(latitude: 1, longitude: 2, context: stack.context)
+        let pin2 = Pin(latitude: 2, longitude: 4, context: stack.context)
+        print(pin1)
+        print(pin2)
+        stack.save()
     }
 
     func applicationWillResignActive(_ application: UIApplication) {

@@ -1,26 +1,66 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11134" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="UWX-Ql-tzk">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11106"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
-        <scene sceneID="tne-QT-ifu">
+        <!--Navigation Controller-->
+        <scene sceneID="Uly-xj-7zQ">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController id="UWX-Ql-tzk" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="rth-Mv-kzG">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="t0Q-Ms-rO4" kind="relationship" relationship="rootViewController" id="cJx-7u-i3d"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vVT-Se-amB" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-390" y="82"/>
+        </scene>
+        <!--Main Map View-->
+        <scene sceneID="vPD-Af-FSl">
+            <objects>
+                <viewController id="t0Q-Ms-rO4" customClass="mainMapView" customModule="Virtual_Tourist" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
-                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                        <viewControllerLayoutGuide type="top" id="CkS-BP-kJE"/>
+                        <viewControllerLayoutGuide type="bottom" id="7j3-30-5dr"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                    <view key="view" contentMode="scaleToFill" id="GNr-qN-tY8">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="YIu-Wx-xI1"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1nV-QD-3Wt">
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="YIu-Wx-xI1" firstAttribute="leading" secondItem="GNr-qN-tY8" secondAttribute="leading" id="18W-R0-Pge"/>
+                            <constraint firstItem="YIu-Wx-xI1" firstAttribute="top" secondItem="CkS-BP-kJE" secondAttribute="bottom" id="7zG-Hw-Ccx"/>
+                            <constraint firstAttribute="trailing" secondItem="1nV-QD-3Wt" secondAttribute="trailing" id="Gsn-Ah-Jxq"/>
+                            <constraint firstItem="7j3-30-5dr" firstAttribute="top" secondItem="YIu-Wx-xI1" secondAttribute="bottom" constant="68" id="P6C-0w-etf"/>
+                            <constraint firstItem="7j3-30-5dr" firstAttribute="top" secondItem="1nV-QD-3Wt" secondAttribute="bottom" id="lNU-Z6-74J"/>
+                            <constraint firstItem="1nV-QD-3Wt" firstAttribute="leading" secondItem="GNr-qN-tY8" secondAttribute="leading" id="obs-8l-Ull"/>
+                            <constraint firstItem="1nV-QD-3Wt" firstAttribute="top" secondItem="CkS-BP-kJE" secondAttribute="bottom" constant="543" id="vsR-6s-qKe"/>
+                            <constraint firstAttribute="trailing" secondItem="YIu-Wx-xI1" secondAttribute="trailing" id="xDH-I2-iz2"/>
+                        </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="Q7v-Md-dyG">
+                        <barButtonItem key="rightBarButtonItem" systemItem="edit" id="896-6f-XZM"/>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="mapView" destination="YIu-Wx-xI1" id="2DZ-K9-paU"/>
+                    </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ABE-mc-Z28" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="476" y="87.706146926536732"/>
         </scene>
     </scenes>
 </document>

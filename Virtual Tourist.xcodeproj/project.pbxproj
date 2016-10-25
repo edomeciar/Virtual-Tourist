@@ -8,24 +8,32 @@
 
 /* Begin PBXBuildFile section */
 		5C494F501DB81EF300447813 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C494F4F1DB81EF300447813 /* AppDelegate.swift */; };
-		5C494F521DB81EF300447813 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C494F511DB81EF300447813 /* ViewController.swift */; };
 		5C494F551DB81EF300447813 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5C494F531DB81EF300447813 /* Main.storyboard */; };
 		5C494F571DB81EF300447813 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5C494F561DB81EF300447813 /* Assets.xcassets */; };
 		5C494F5A1DB81EF300447813 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5C494F581DB81EF300447813 /* LaunchScreen.storyboard */; };
 		5C494F631DB81F5400447813 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5C494F611DB81F5400447813 /* Model.xcdatamodeld */; };
 		5C494F671DB8217000447813 /* mainMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C494F661DB8217000447813 /* mainMapView.swift */; };
+		5C494F741DB8D3FE00447813 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C494F731DB8D3FE00447813 /* CoreDataStack.swift */; };
+		5C494F791DB8D4F100447813 /* Pin+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C494F751DB8D4F100447813 /* Pin+CoreDataClass.swift */; };
+		5C494F7A1DB8D4F100447813 /* Pin+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C494F761DB8D4F100447813 /* Pin+CoreDataProperties.swift */; };
+		5C494F7B1DB8D4F100447813 /* Photo+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C494F771DB8D4F100447813 /* Photo+CoreDataClass.swift */; };
+		5C494F7C1DB8D4F100447813 /* Photo+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C494F781DB8D4F100447813 /* Photo+CoreDataProperties.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		5C494F4C1DB81EF300447813 /* Virtual Tourist.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Virtual Tourist.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C494F4F1DB81EF300447813 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		5C494F511DB81EF300447813 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		5C494F541DB81EF300447813 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		5C494F561DB81EF300447813 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5C494F591DB81EF300447813 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5C494F5B1DB81EF300447813 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5C494F621DB81F5400447813 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		5C494F661DB8217000447813 /* mainMapView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = mainMapView.swift; sourceTree = "<group>"; };
+		5C494F731DB8D3FE00447813 /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = SOURCE_ROOT; };
+		5C494F751DB8D4F100447813 /* Pin+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Pin+CoreDataClass.swift"; sourceTree = "<group>"; };
+		5C494F761DB8D4F100447813 /* Pin+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Pin+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		5C494F771DB8D4F100447813 /* Photo+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Photo+CoreDataClass.swift"; sourceTree = "<group>"; };
+		5C494F781DB8D4F100447813 /* Photo+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Photo+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,7 +69,6 @@
 				5C494F681DB8219E00447813 /* Controllers */,
 				5C494F641DB81F6100447813 /* Model */,
 				5C494F4F1DB81EF300447813 /* AppDelegate.swift */,
-				5C494F511DB81EF300447813 /* ViewController.swift */,
 				5C494F531DB81EF300447813 /* Main.storyboard */,
 				5C494F561DB81EF300447813 /* Assets.xcassets */,
 				5C494F581DB81EF300447813 /* LaunchScreen.storyboard */,
@@ -73,6 +80,11 @@
 		5C494F641DB81F6100447813 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				5C494F751DB8D4F100447813 /* Pin+CoreDataClass.swift */,
+				5C494F761DB8D4F100447813 /* Pin+CoreDataProperties.swift */,
+				5C494F771DB8D4F100447813 /* Photo+CoreDataClass.swift */,
+				5C494F781DB8D4F100447813 /* Photo+CoreDataProperties.swift */,
+				5C494F731DB8D3FE00447813 /* CoreDataStack.swift */,
 				5C494F651DB820F600447813 /* Client */,
 				5C494F611DB81F5400447813 /* Model.xcdatamodeld */,
 			);
@@ -127,6 +139,7 @@
 					5C494F4B1DB81EF300447813 = {
 						CreatedOnToolsVersion = 8.0;
 						DevelopmentTeam = C3E3A88EW4;
+						LastSwiftMigration = 0800;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -167,8 +180,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5C494F521DB81EF300447813 /* ViewController.swift in Sources */,
+				5C494F741DB8D3FE00447813 /* CoreDataStack.swift in Sources */,
+				5C494F7B1DB8D4F100447813 /* Photo+CoreDataClass.swift in Sources */,
 				5C494F501DB81EF300447813 /* AppDelegate.swift in Sources */,
+				5C494F7A1DB8D4F100447813 /* Pin+CoreDataProperties.swift in Sources */,
+				5C494F791DB8D4F100447813 /* Pin+CoreDataClass.swift in Sources */,
+				5C494F7C1DB8D4F100447813 /* Photo+CoreDataProperties.swift in Sources */,
 				5C494F671DB8217000447813 /* mainMapView.swift in Sources */,
 				5C494F631DB81F5400447813 /* Model.xcdatamodeld in Sources */,
 			);
