@@ -34,7 +34,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="YIu-Wx-xI1"/>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="YIu-Wx-xI1">
+                                <connections>
+                                    <outlet property="delegate" destination="t0Q-Ms-rO4" id="OPZ-hc-35x"/>
+                                </connections>
+                            </mapView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1nV-QD-3Wt">
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
@@ -55,7 +59,7 @@
                         <barButtonItem key="rightBarButtonItem" systemItem="edit" id="896-6f-XZM"/>
                     </navigationItem>
                     <connections>
-                        <outlet property="mapView" destination="YIu-Wx-xI1" id="2DZ-K9-paU"/>
+                        <outlet property="mapView" destination="YIu-Wx-xI1" id="6nd-bV-NLc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ABE-mc-Z28" userLabel="First Responder" sceneMemberID="firstResponder"/>

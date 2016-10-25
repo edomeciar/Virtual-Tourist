@@ -19,6 +19,7 @@ class mainMapView : UIViewController, MKMapViewDelegate, NSFetchedResultsControl
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        restoreMapRegion()
       
         //add long press action adding new pin
         let longPress = UILongPressGestureRecognizer(target: self, action: #selector(mainMapView.addPinLongPress(_:)))
@@ -98,8 +99,23 @@ class mainMapView : UIViewController, MKMapViewDelegate, NSFetchedResultsControl
             "longitudeDelka" : mapView.region.span.longitudeDelta
         ]
         NSKeyedArchiver.archiveRootObject(regionDictionary, toFile: filePathMapRegion)
+        print("mapView region changed")
     }
     
-    
+    func restoreMapRegion(){
+        if let regionDictionary = NSKeyedUnarchiver.unarchiveObject(withFile: filePathMapRegion) as? [String:Any]{
+            let latitude = regionDictionary["latitude"] as! CLLocationDegrees
+            let longitude = regionDictionary["longitude"] as! CLLocationDegrees
+            let center = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+            let latitudeDelata = regionDictionary["latitudeDelta"] as! CLLocationDegrees
+            let longitudeDelta = regionDictionary["latitudeDelta"] as! CLLocationDegrees
+            let span = MKCoordinateSpan(latitudeDelta: latitudeDelata, longitudeDelta: longitudeDelta)
+            let savedRegion = MKCoordinateRegion(center: center, span: span)
+            print("mapView resotred")
+            mapView.setRegion(savedRegion, animated: true)
+        }else{
+            print("RegionDictionary don't exist")
+        }
+    }
     
 }
