@@ -25,10 +25,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func preLoadData(){
-        let pin1 = Pin(latitude: 1, longitude: 2, context: stack.context)
-        let pin2 = Pin(latitude: 2, longitude: 4, context: stack.context)
+        do {
+            try stack.dropAllData()
+        } catch {
+            print("Error droping all objects in DB")
+        }
+        let pin1 = Pin(latitude: 44.1622354887307, longitude: 18.600699292463, context: stack.context)
+
         print(pin1)
-        print(pin2)
         stack.save()
     }
 

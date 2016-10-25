@@ -122,7 +122,14 @@ class mainMapView : UIViewController, MKMapViewDelegate, NSFetchedResultsControl
     
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         let pin = view.annotation as! Pin
-        performSegue(withIdentifier: "ShowPinPhotos", sender: pin)
+        if editMode{
+            mapView.removeAnnotation(pin)
+            sharedContext.delete(pin)
+            print("Pin deleted")
+        }else{
+            performSegue(withIdentifier: "ShowPinPhotos", sender: pin)
+        }
+        
     }
     
     func restoreMapRegion(){
