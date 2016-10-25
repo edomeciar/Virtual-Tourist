@@ -18,6 +18,7 @@
 		5C494F7A1DB8D4F100447813 /* Pin+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C494F761DB8D4F100447813 /* Pin+CoreDataProperties.swift */; };
 		5C494F7B1DB8D4F100447813 /* Photo+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C494F771DB8D4F100447813 /* Photo+CoreDataClass.swift */; };
 		5C494F7C1DB8D4F100447813 /* Photo+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C494F781DB8D4F100447813 /* Photo+CoreDataProperties.swift */; };
+		5C59670A1DC0081F0021C75F /* PhotoAlbumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5967091DC0081F0021C75F /* PhotoAlbumViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 		5C494F761DB8D4F100447813 /* Pin+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Pin+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		5C494F771DB8D4F100447813 /* Photo+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Photo+CoreDataClass.swift"; sourceTree = "<group>"; };
 		5C494F781DB8D4F100447813 /* Photo+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Photo+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		5C5967091DC0081F0021C75F /* PhotoAlbumViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoAlbumViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +104,7 @@
 			isa = PBXGroup;
 			children = (
 				5C494F661DB8217000447813 /* mainMapView.swift */,
+				5C5967091DC0081F0021C75F /* PhotoAlbumViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -182,6 +185,7 @@
 			files = (
 				5C494F741DB8D3FE00447813 /* CoreDataStack.swift in Sources */,
 				5C494F7B1DB8D4F100447813 /* Photo+CoreDataClass.swift in Sources */,
+				5C59670A1DC0081F0021C75F /* PhotoAlbumViewController.swift in Sources */,
 				5C494F501DB81EF300447813 /* AppDelegate.swift in Sources */,
 				5C494F7A1DB8D4F100447813 /* Pin+CoreDataProperties.swift in Sources */,
 				5C494F791DB8D4F100447813 /* Pin+CoreDataClass.swift in Sources */,
@@ -349,6 +353,7 @@
 				5C494F601DB81EF300447813 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

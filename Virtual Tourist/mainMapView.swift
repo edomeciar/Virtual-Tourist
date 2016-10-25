@@ -15,10 +15,28 @@ class mainMapView : UIViewController, MKMapViewDelegate, NSFetchedResultsControl
     
     
     @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet weak var editButton: UIBarButtonItem!
+    @IBOutlet weak var editLabelView: UIView!
+    
+    var editMode : Bool = false
+    
+    func setEditMode(editMode: Bool){
+        self.editMode = editMode
+        editLabelView.isHidden = !editMode
+        if editMode{
+            editButton.title = "Done"
+        }else{
+            editButton.title = "Edit"
+        }
+        print("edit mode set to: \(self.editMode)")
+    }
+    
+    @IBAction func editButtonTouch(_ sender: AnyObject) {
+        setEditMode(editMode: !editMode)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         restoreMapRegion()
       
         //add long press action adding new pin
@@ -102,6 +120,11 @@ class mainMapView : UIViewController, MKMapViewDelegate, NSFetchedResultsControl
         print("mapView region changed")
     }
     
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        let pin = view.annotation as! Pin
+        performSegue(withIdentifier: "ShowPinPhotos", sender: pin)
+    }
+    
     func restoreMapRegion(){
         if let regionDictionary = NSKeyedUnarchiver.unarchiveObject(withFile: filePathMapRegion) as? [String:Any]{
             let latitude = regionDictionary["latitude"] as! CLLocationDegrees
@@ -115,6 +138,16 @@ class mainMapView : UIViewController, MKMapViewDelegate, NSFetchedResultsControl
             mapView.setRegion(savedRegion, animated: true)
         }else{
             print("RegionDictionary don't exist")
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "ShowPinPhotos"{
+            let pin = sender as! Pin
+            let photoAlbumView = segue.destination as! PhotoAlbumViewController
+            photoAlbumView.mapPin = pin
+            photoAlbumView.mapLatitudeDelta = mapView.region.span.latitudeDelta
+            photoAlbumView.mapLongituteDelta = mapView.region.span.longitudeDelta
         }
     }
     
