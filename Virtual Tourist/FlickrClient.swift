@@ -101,7 +101,7 @@ class FlickrClient : NSObject{
         
         // create session and request
         let session = URLSession.shared
-        let request = NSURLRequest(url: flickrURLFromParameters(parameters: methodParameters) as URL)
+        let request = NSURLRequest(url: flickrURLFromParameters(parameters: methodParametersWithPageNumber) as URL)
         
         // create network request
         let task = session.dataTask(with: request as URLRequest) { (data, response, error) in

@@ -147,7 +147,6 @@ class mainMapView : UIViewController, MKMapViewDelegate, NSFetchedResultsControl
                         }
                     }
                 }
-                
             }else{
                 print(errorString)
             }
@@ -176,6 +175,7 @@ class mainMapView : UIViewController, MKMapViewDelegate, NSFetchedResultsControl
             mapView.removeAnnotation(pin)
             sharedContext.delete(pin)
             print("Pin deleted")
+            self.saveContext()
         }else{
             performSegue(withIdentifier: "ShowPinPhotos", sender: pin)
         }

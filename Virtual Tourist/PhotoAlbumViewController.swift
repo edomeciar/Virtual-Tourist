@@ -65,21 +65,22 @@ class PhotoAlbumViewController: UIViewController, MKMapViewDelegate, UICollectio
             print("delete all photos for Pin")
             for photo in (fetchedResultsController.fetchedObjects )! {
                 sharedContext.delete(photo)
+                print("delete photo \(photo.imageUrl)")
+                self.saveContext()
             }
-            self.saveContext()
             getNewImages()
+            self.photosCollectionView.reloadData()
         }else{
             print("pictures to delete: \(selectedPhotos!.count)")
             for selectedPhoto in selectedPhotos! {
                 let photo = selectedPhoto
-                
                 sharedContext.delete(photo)
+                print("delete photo \(photo.imageUrl)")
                 self.saveContext()
             }
-            
             selectedPhotos = nil
         }
-        self.photosCollectionView.reloadData()
+        
     }
     
     
@@ -118,9 +119,10 @@ class PhotoAlbumViewController: UIViewController, MKMapViewDelegate, UICollectio
                                 self.saveContext()
                             }
                         }
-                        DispatchQueue.main.async {
-                            self.photosCollectionView.reloadData()
-                        }
+                        
+                    }
+                    DispatchQueue.main.async {
+                        self.photosCollectionView.reloadData()
                     }
                 }else{
                     print(errorString)
@@ -227,17 +229,49 @@ class PhotoAlbumViewController: UIViewController, MKMapViewDelegate, UICollectio
         
         if let photo = fetchedResultsController.object(at: indexPath) as? Photo {
             if let imageData = photo.image{
+                print("Photo wiht image data")
                 let image = UIImage(data: imageData as Data)
                 let imageView = UIImageView(image: image)
-                cell.backgroundView = imageView
-                cell.activityIndicator.stopAnimating()
+                DispatchQueue.main.async {
+                    cell.backgroundView = imageView
+                    cell.activityIndicator.stopAnimating()
+                }
+            }else if photo.imageUrl == nil || photo.imageUrl == "" {
+                print("Photo without image URL")
+                DispatchQueue.main.async {
+                    cell.activityIndicator.stopAnimating()
+                }
             }else{
-                print("no image stored in photo")
+                let photoUrl = photo.imageUrl!
+                let imageURL = NSURL(string: photoUrl)
+                if let imageData = NSData(contentsOf: imageURL! as URL) {
+                    photo.image = imageData
+                    self.saveContext()
+                    let image = UIImage(data: imageData as Data)
+                    let imageView = UIImageView(image: image)
+                    DispatchQueue.main.async {
+                        cell.backgroundView = imageView
+                        cell.activityIndicator.stopAnimating()
+                    }
+                } else {
+                    print("Image does not exist at \(imageURL)")
+                    DispatchQueue.main.async {
+                        cell.activityIndicator.stopAnimating()
+                    }
+                }
+                
             }
         }else{
             let imageView = UIImageView(image: nil)
             cell.backgroundView = imageView
-            cell.activityIndicator.stopAnimating()
+            cell.activityIndicator.startAnimating()
+        }
+        
+        if selectedPhotos == nil || selectedPhotos!.count == 0 {
+            cell.contentView.backgroundColor = nil
+            cell.isHighlighted = false
+            cell.isSelected = false
+            collectionView.deselectItem(at: indexPath, animated: false)
         }
         
         return cell
@@ -245,5 +279,34 @@ class PhotoAlbumViewController: UIViewController, MKMapViewDelegate, UICollectio
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+        switch type {
+        case .insert:
+            print("NSFetchedResultsController - didChangeObject - Insert")
+            photosCollectionView.insertItems(at: [newIndexPath!])
+        case .delete:
+            print("NSFetchedResultsController - didChangeObject - Delete")
+            photosCollectionView.deleteItems(at: [indexPath!])
+        case .update:
+            print("NSFetchedResultsController - didChangeObject - Update")
+            if let cell = photosCollectionView.cellForItem(at: indexPath!) as? PhotoCollectionViewCell{
+                
+            }
+            let photo = controller.object(at: indexPath!) as! Photo
+        case .move:
+            print("NSFetchedResultsController - didChangeObject - Move")
+            photosCollectionView.deleteItems(at: [indexPath!])
+            photosCollectionView.insertItems(at: [newIndexPath!])
+        }
+    }
+    
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        print("controllerDidChangeContent called")
     }
 }
