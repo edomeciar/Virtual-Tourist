@@ -20,6 +20,22 @@ class mainMapView : UIViewController, MKMapViewDelegate, NSFetchedResultsControl
     
     var editMode : Bool = false
     
+    var sharedContext: NSManagedObjectContext{
+        let delegate = UIApplication.shared.delegate as! AppDelegate
+        let stack = delegate.stack
+        return stack.context
+    }
+    
+    private func saveContext(){
+        do{
+            let delegate = UIApplication.shared.delegate as! AppDelegate
+            try delegate.stack.save()
+            print("context saved ")
+        }catch let error as NSError {
+            print("context NOT saved \(error)")
+        }
+    }
+    
     func setEditMode(editMode: Bool){
         self.editMode = editMode
         editLabelView.isHidden = !editMode
@@ -77,11 +93,7 @@ class mainMapView : UIViewController, MKMapViewDelegate, NSFetchedResultsControl
         
     }
     
-    var sharedContext: NSManagedObjectContext{
-        let delegate = UIApplication.shared.delegate as! AppDelegate
-        let stack = delegate.stack
-        return stack.context
-    }
+    
     
     
     
@@ -93,15 +105,53 @@ class mainMapView : UIViewController, MKMapViewDelegate, NSFetchedResultsControl
             let newCoord = mapView.convert(touchPoint, toCoordinateFrom: mapView)
             let mapPin = Pin(latitude: newCoord.latitude, longitude: newCoord.longitude, context: sharedContext)
             print("New Pin lat: \(mapPin.latitude), Pin long: \(mapPin.longitude)")
-            do{
-                let delegate = UIApplication.shared.delegate as! AppDelegate
-                try delegate.stack.save()
-                print("Pin saved")
-            }catch let error as NSError {
-                print("Could not save \(error)")
-            }
-            
+            self.saveContext()
+            getPhotosForPin(pin: mapPin)
             mapView.addAnnotation(mapPin)
+        }
+    }
+    
+    func getPhotosForPin(pin : Pin){
+        print("get photos for Pin")
+        if FlickrClient.isCoordinateInRange(coordinate: pin.latitude, forRange: Constants.Flickr.SearchLatRange) && FlickrClient.isCoordinateInRange(coordinate: pin.longitude, forRange: Constants.Flickr.SearchLonRange) {
+            let methodParameters = [
+                Constants.FlickrParameterKeys.Method: Constants.FlickrParameterValues.SearchMethod,
+                Constants.FlickrParameterKeys.APIKey: Constants.FlickrParameterValues.APIKey,
+                Constants.FlickrParameterKeys.BoundingBox: FlickrClient.bboxString(latitude: pin.latitude, longitude: pin.longitude),
+                Constants.FlickrParameterKeys.SafeSearch: Constants.FlickrParameterValues.UseSafeSearch,
+                Constants.FlickrParameterKeys.Extras: Constants.FlickrParameterValues.MediumURL,
+                Constants.FlickrParameterKeys.Format: Constants.FlickrParameterValues.ResponseFormat,
+                Constants.FlickrParameterKeys.NoJSONCallback: Constants.FlickrParameterValues.DisableJSONCallback,
+                Constants.FlickrParameterKeys.Per_page : Constants.FlickrParameterValues.Per_page
+            ]
+         FlickrClient.sharedInstance().displayImageFromFlickrBySearch(methodParameters: methodParameters as [String : AnyObject], completitionHandler: { (photoArray, errorString) in
+            print("starting processing photo data")
+            if errorString == nil{
+                if let photos = photoArray as [[String: AnyObject?]]? {
+                    print("getPhotoForPin photo array count\(photoArray?.count)")
+                    for photo in photos{
+                        if let photoUrl = photo["url_m"] as? String {
+                            
+                            let photo = Photo(imageUrl: photoUrl, context: self.sharedContext)
+                            let imageURL = NSURL(string: photoUrl)
+                            DispatchQueue.main.async{
+                                if let imageData = NSData(contentsOf: imageURL! as URL) {
+                                photo.image = imageData
+                                } else {
+                                    print("Image does not exist at \(imageURL)")
+                                }
+                            }
+                            
+                            photo.pin = pin
+                            self.saveContext()
+                        }
+                    }
+                }
+                
+            }else{
+                print(errorString)
+            }
+         })
         }
     }
     

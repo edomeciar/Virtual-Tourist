@@ -2,12 +2,13 @@
 //  Photo+CoreDataProperties.swift
 //  Virtual Tourist
 //
-//  Created by Eduard Meciar on 20/10/2016.
+//  Created by hovno on 14/11/2016.
 //  Copyright © 2016 Eduard Meciar. All rights reserved.
 //
 
 import Foundation
-import CoreData 
+import CoreData
+
 
 extension Photo {
 
@@ -16,6 +17,7 @@ extension Photo {
     }
 
     @NSManaged public var imageUrl: String?
+    @NSManaged public var image: NSData?
     @NSManaged public var pin: Pin?
 
 }
